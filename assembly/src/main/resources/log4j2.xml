@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+    <Properties>
+        <!-- 声明日志文件存储的根目录，这里通过读取配置文件中的配置获取 -->
+        <Property name="LOG_HOME" value="${spring:logging.home.path}"/>
+        <!-- 声明应用名称，通过读取配置文件中的配置获取 -->
+        <Property name="APP_NAME" value="${spring:spring.application.name}"/>
+        <!-- 声明日志格式：时间 + 日志级别 + 线程名 + 类名 + 日志信息 + 换行 -->
+        <Property name="LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss} %-5level [%thread][%class{36}:%line] - %msg%n"/>
+    </Properties>
+
+    <Appenders>
+        <!--输出控制台的配置-->
+        <Console name="STDOUT-APPENDER" target="SYSTEM_OUT">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 输出日志的格式,编码格式-->
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+        </Console>
+
+        <Console name="STDERR-APPENDER" target="SYSTEM_OUT">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 输出日志的格式，编码格式-->
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+        </Console>
+
+        <!-- ERROR级别日志，只打印error
+        fileName 指定当前日志文件的位置和文件名称
+        filePattern 指定当发生Rolling时，文件的转移和重命名规则
+        -->
+        <RollingFile name="ERROR-APPENDER" fileName="${LOG_HOME}/${APP_NAME}/common-error.log"
+                     filePattern="${LOG_HOME}/${APP_NAME}/common.error.log.%d{yyyy-MM-dd}">
+            <!-- 表示打印error级别以上的，该ThresholdFilter的操作表示对info级别以上的同意打印，不匹配的拒绝打印 -->
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 输出日志的格式，编码格式-->
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+            <!--TimeBasedTriggeringPolicy 这个配置需要和filePattern结合使用
+					注意filePattern中配置的文件重命名规则是${LOG_HOME}/${APP_NAME}/common.error.log.%d{yyyy-MM-dd}，最小的时间粒度是天。
+					TimeBasedTriggeringPolicy指定的size是1，结合起来就是每1天生成一个新文件。
+					如果改成%d{yyyy-MM-dd HH}，最小粒度为小时，则每一个小时生成一个文件。
+				-->
+            <TimeBasedTriggeringPolicy/>
+            <!-- 最大文件里只能保存3个 -->
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+        <!-- App 默认日志 -->
+        <RollingFile name="APP-DEFAULT-APPENDER" fileName="${LOG_HOME}/${APP_NAME}/app-default.log"
+                     filePattern="${LOG_HOME}/${APP_NAME}/common.error.log.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+            <TimeBasedTriggeringPolicy/>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+        <!-- SpringBoot启动日志 -->
+        <RollingFile name="SPRING-APPENDER" fileName="${LOG_HOME}/spring/spring.log"
+                     filePattern="${LOG_HOME}/spring/spring.log.%d{yyyy-MM-dd}"
+                     append="true">
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+            <TimeBasedTriggeringPolicy/>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+        <!-- gmall-common日志 -->
+        <RollingFile name="GMALL-COMMON-APPENDER" fileName="${LOG_HOME}/${APP_NAME}/gmail-common.log"
+                     filePattern="${LOG_HOME}/${APP_NAME}/gmail-common.log.%d{yyyy-MM-dd}"
+                     append="true">
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="3GB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1">
+                <!-- 设置当前文件大于5GB则删除该文件 -->
+                <Delete basePath="${LOG_HOME}/${APP_NAME}">
+                    <IfFileName glob="gmail-common.log.*"/>
+                    <IfAccumulatedFileSize exceeds="5GB" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- gmall-dal日志 -->
+        <RollingFile name="GMALL-DAL-APPENDER" fileName="${LOG_HOME}/${APP_NAME}/gmail-dal.log"
+                     filePattern="${LOG_HOME}/${APP_NAME}/gmail-dal.log.%d{yyyy-MM-dd}"
+                     append="true">
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="3GB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1">
+                <Delete basePath="${LOG_HOME}/${APP_NAME}">
+                    <IfFileName glob="gmail-dal.log.*"/>
+                    <IfAccumulatedFileSize exceeds="5GB" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- gmall-spi日志 -->
+        <RollingFile name="GMALL-SPI-APPENDER" fileName="${LOG_HOME}/${APP_NAME}/gmail-spi.log"
+                     filePattern="${LOG_HOME}/${APP_NAME}/gmail-spi.log.%d{yyyy-MM-dd}"
+                     append="true">
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="3GB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1">
+                <Delete basePath="${LOG_HOME}/${APP_NAME}">
+                    <IfFileName glob="gmail-spi.log.*"/>
+                    <IfAccumulatedFileSize exceeds="5GB" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- gmall-service日志 -->
+        <RollingFile name="GMALL-SERVICE-APPENDER" fileName="${LOG_HOME}/${APP_NAME}/gmail-service.log"
+                     filePattern="${LOG_HOME}/${APP_NAME}/gmail-service.log.%d{yyyy-MM-dd}"
+                     append="true">
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="3GB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1">
+                <Delete basePath="${LOG_HOME}/${APP_NAME}">
+                    <IfFileName glob="gmail-service.log.*"/>
+                    <IfAccumulatedFileSize exceeds="5GB" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- gmall-web日志 -->
+        <RollingFile name="GMALL-WEB-APPENDER" fileName="${LOG_HOME}/${APP_NAME}/gmail-web.log"
+                     filePattern="${LOG_HOME}/${APP_NAME}/gmail-web.log.%d{yyyy-MM-dd}"
+                     append="true">
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="3GB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1">
+                <Delete basePath="${LOG_HOME}/${APP_NAME}">
+                    <IfFileName glob="gmail-web.log.*"/>
+                    <IfAccumulatedFileSize exceeds="5GB" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+
+    <Loggers>
+
+        <Logger name="STDOUT" additivity="false" level="info">
+            <AppenderRef ref="STDOUT-APPENDER"/>
+        </Logger>
+
+        <AsyncLogger name="STDERR" additivity="false" level="error">
+            <AppenderRef ref="STDERR-APPENDER"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="org.springframework" additivity="false" level="${spring:logging.level.com.alipay.gmall}">
+            <AppenderRef ref="SPRING-APPENDER"/>
+            <AppenderRef ref="STDOUT-APPENDER"/>
+        </AsyncLogger>
+
+        <!-- 设置异步打印日志
+         name：对应的包名/类名
+         additivity: 一旦一个日志输出到一个Logger，这个Logger的additivity设置为false，那么这个日志不会再继续向父Logger进行传递，忽略其他Logger的additivity的设置。
+         level：日志级别
+         -->
+        <AsyncLogger name="com.alipay.gmall.common" additivity="false" level="${spring:logging.level.com.alipay.gmall}">
+            <AppenderRef ref="ERROR-APPENDER"/>
+            <AppenderRef ref="GMALL-COMMON-APPENDER"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="com.alipay.gmall.dal" additivity="false" level="${spring:logging.level.com.alipay.gmall}">
+            <AppenderRef ref="ERROR-APPENDER"/>
+            <AppenderRef ref="GMALL-DAL-APPENDER"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="com.alipay.gmall.spi" additivity="false" level="${spring:logging.level.com.alipay.gmall}">
+            <AppenderRef ref="ERROR-APPENDER"/>
+            <AppenderRef ref="GMALL-SPI-APPENDER"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="com.alipay.gmall.service" additivity="false" level="${spring:logging.level.com.alipay.gmall}">
+            <AppenderRef ref="ERROR-APPENDER"/>
+            <AppenderRef ref="GMALL-SERVICE-APPENDER"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="com.alipay.gmall.web" additivity="false" level="${spring:logging.level.com.alipay.gmall}">
+            <AppenderRef ref="ERROR-APPENDER"/>
+            <AppenderRef ref="GMALL-WEB-APPENDER"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="com.alipay.gmall" additivity="false" level="${spring:logging.level.com.alipay.gmall}">
+            <AppenderRef ref="APP-DEFAULT-APPENDER"/>
+            <AppenderRef ref="ERROR-APPENDER"/>
+            <AppenderRef ref="STDOUT-APPENDER"/>
+        </AsyncLogger>
+
+        <AsyncRoot level="${spring:logging.level.com.alipay.gmall}">
+            <AppenderRef ref="APP-DEFAULT-APPENDER"/>
+            <AppenderRef ref="ERROR-APPENDER"/>
+            <AppenderRef ref="STDOUT-APPENDER"/>
+        </AsyncRoot>
+
+    </Loggers>
+
+</Configuration>

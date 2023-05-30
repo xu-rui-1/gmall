@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.12</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.alipay.gmall</groupId>
+    <artifactId>gamll-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>gamll-parent</name>
+    <description>gamll-parent</description>
+    <packaging>pom</packaging>
+    <properties>
+        <java.version>1.8</java.version>
+        <gmall.version>0.0.1-SNAPSHOT</gmall.version>
+        <swagger2.version>2.8.0</swagger2.version>
+        <spring.boot.version>2.7.12</spring.boot.version>
+        <mybatis.version>2.3.0</mybatis.version>
+        <mysql.version>5.1.38</mysql.version>
+        <druid.version>1.2.6</druid.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <log4j.version>1.2.17</log4j.version>
+    </properties>
+    <modules>
+        <module>common</module>
+        <module>spi</module>
+        <module>service</module>
+        <module>dal</module>
+        <module>web</module>
+        <module>assembly</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alipay.gmall</groupId>
+                <artifactId>assembly</artifactId>
+                <version>${gmall.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.gmall</groupId>
+                <artifactId>service</artifactId>
+                <version>${gmall.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.gmall</groupId>
+                <artifactId>dal</artifactId>
+                <version>${gmall.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.gmall</groupId>
+                <artifactId>spi</artifactId>
+                <version>${gmall.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.gmall</groupId>
+                <artifactId>common</artifactId>
+                <version>${gmall.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.gmall</groupId>
+                <artifactId>web</artifactId>
+                <version>${gmall.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+                <exclusions><!-- 去掉springboot默认配置 -->
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
+                <exclusions><!-- 去掉springboot默认配置 -->
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <!--        swagger2-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+
+            <!-- mybatis -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <!-- 数据库驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+
+            <!-- druid连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>2.7.11</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>2.11.1</version>
+            </dependency>
+
+            <!--        jedis依赖-->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>4.3.1</version>
+            </dependency>
+
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- 引入log4j2依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <!-- Log4j SpringBoot 引入这个依赖是为了能够在log4j.xml中读取application配置文件的属性-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-spring-boot</artifactId>
+                <version>2.17.2</version>
+            </dependency>
+            <!-- 引入这个依赖是为了能够使用异步打印 -->
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>3.3.7</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
