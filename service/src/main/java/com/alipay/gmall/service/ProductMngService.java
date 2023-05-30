@@ -14,27 +14,27 @@ public interface ProductMngService {
      * @param productBaseInfoDTO
      * @return
      */
-    Integer addProduct(ProductBaseInfoDTO productBaseInfoDTO);
+    int addProduct(ProductBaseInfoDTO productBaseInfoDTO);
 
     /**
      * 更新产品信息
      * @param productBaseInfoDTO
      * @return
      */
-    Integer updateProduct(ProductBaseInfoDTO productBaseInfoDTO);
+    int updateProduct(ProductBaseInfoDTO productBaseInfoDTO);
 
     /**
      * 根据名称删除产品
-     * @param name
+     * @param id
      */
-    void deleteProductByName(String name);
+    void deleteProductById(int id);
 
     /**
      * 根据名称查询产品
-     * @param name
+     * @param productName
      * @return
      */
-    ProductBaseInfoDTO queryProductInfoByName(String name);
+    List<ProductBaseInfoDTO> queryProductInfoByName(String productName);
 
     /**
      * 根据id查询产品
@@ -47,5 +47,5 @@ public interface ProductMngService {
      * 查询所有产品
      * @return
      */
-    List<ProductBaseInfoDTO> queryAllProduct();
+    List<ProductBaseInfoDTO> queryAllProduct(int pageIndex, int pageSize);
 }
