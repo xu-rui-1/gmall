@@ -41,7 +41,20 @@ public class ProductMngServiceImpl implements ProductMngService {
 
     @Override
     public Integer updateProduct(ProductBaseInfoDTO productBaseInfoDTO) {
-        return null;
+        int ret = -1;
+        Integer id = productBaseInfoDTO.getId();
+        if (id == null) {
+            LOGGER.error("产品id为空，请传入产品id");
+            return ret;
+        }
+        ProductBaseInfoDO productBaseInfoDO = ProductMngServiceUtil.convertProductBaseInfoDTO2DO(productBaseInfoDTO);
+        ret = productBaseInfoDAO.updateByPrimaryKeySelective(productBaseInfoDO);
+        if (ret <= 0) {
+            LOGGER.error("由于网络抖动原因，更新产品信息失败，请联系技术同学....");
+            return ret;
+        }
+
+        return productBaseInfoDO.getId();
     }
 
     @Override

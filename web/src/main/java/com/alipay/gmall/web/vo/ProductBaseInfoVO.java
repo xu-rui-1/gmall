@@ -32,6 +32,14 @@ public class ProductBaseInfoVO implements Serializable {
      */
     private String productDetail;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getProductName() {
         return productName;
     }
@@ -59,7 +67,8 @@ public class ProductBaseInfoVO implements Serializable {
     @Override
     public String toString() {
         return "ProductBaseInfoVO{" +
-                "productName='" + productName + '\'' +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
                 ", productPrice=" + productPrice +
                 ", productDetail='" + productDetail + '\'' +
                 '}';

@@ -37,7 +37,7 @@ public class ProductMngController {
     public int addProduct(@RequestBody ProductBaseInfoVO productBaseInfoVO) {
         ProductBaseInfoDTO productBaseInfoDTO = ProductBaseInfoConvertUtil.convertProductBaseInfoVO2DTO(productBaseInfoVO);
         Integer ret = productMngService.addProduct(productBaseInfoDTO);
-        if (ret < 0) {
+        if (ret <= 0) {
             LOGGER.error(String.format("Add product error, productBaseInfoVO=%s", productBaseInfoVO));
         }
         return ret;
@@ -48,7 +48,7 @@ public class ProductMngController {
     public int updateProduct(@RequestBody ProductBaseInfoVO productBaseInfoVO) {
         ProductBaseInfoDTO productBaseInfoDTO = ProductBaseInfoConvertUtil.convertProductBaseInfoVO2DTO(productBaseInfoVO);
         Integer ret = productMngService.updateProduct(productBaseInfoDTO);
-        if (ret < 0) {
+        if (ret <= 0) {
             LOGGER.error(String.format("Add product error, productBaseInfoVO=%s", productBaseInfoVO));
         }
         return ret;
