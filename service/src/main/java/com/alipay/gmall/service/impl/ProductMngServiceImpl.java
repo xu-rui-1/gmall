@@ -4,6 +4,8 @@
  */
 package com.alipay.gmall.service.impl;
 
+import com.alipay.gmall.common.client.RedisClient;
+import com.alipay.gmall.common.constant.RedisConstants;
 import com.alipay.gmall.common.enums.ResultCodeEnum;
 import com.alipay.gmall.common.exception.ProductBizException;
 import com.alipay.gmall.dal.dao.ProductBaseInfoMapper;
@@ -13,7 +15,6 @@ import com.alipay.gmall.dto.ProductBaseInfoDTO;
 import com.alipay.gmall.service.ProductMngService;
 import com.alipay.gmall.utils.ProductMngServiceUtil;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,9 @@ public class ProductMngServiceImpl implements ProductMngService {
 
     @Resource
     private ProductBaseInfoMapper productBaseInfoMapper;
+
+    @Resource
+    private RedisClient redisClient;
 
     @Override
     public int addProduct(ProductBaseInfoDTO productBaseInfoDTO) {
@@ -93,11 +97,28 @@ public class ProductMngServiceImpl implements ProductMngService {
 
     @Override
     public ProductBaseInfoDTO queryProductInfoById(Integer id) {
-        ProductBaseInfo productBaseInfo = productBaseInfoMapper.selectByPrimaryKey(id);
+        /**
+         * 该接口并发量比较多，如果直接查数据库的话，可能会打挂数据库，故需要使用redis缓存
+         * 使用双检加锁策略进行查询
+         */
+        String key = RedisConstants.PRODUCT_KEY_PREFIX + id;
+        ProductBaseInfo productBaseInfo = redisClient.getObject(key, ProductBaseInfo.class);
         if (Objects.isNull(productBaseInfo)) {
-            String msg = String.format("不存在id=%s的商品", id);
-            LOGGER.error(msg);
-            throw new ProductBizException(ResultCodeEnum.QUERY_ERROR, msg);
+            //第一次查询缓存中没有则进行加锁
+            synchronized (ProductMngServiceImpl.class) {
+                //再次查redis缓存，如果不存在，则查询数据库，并且将查询到的结果回写进redis
+                productBaseInfo = redisClient.getObject(key, ProductBaseInfo.class);
+                if (Objects.isNull(productBaseInfo)) {
+                    productBaseInfo = productBaseInfoMapper.selectByPrimaryKey(id);
+                    if (Objects.isNull(productBaseInfo)) {
+                        String msg = String.format("不存在id=%s的商品", id);
+                        LOGGER.error(msg);
+                        throw new ProductBizException(ResultCodeEnum.QUERY_ERROR, msg);
+                    } else {
+                        redisClient.add(key, productBaseInfo);
+                    }
+                }
+            }
         }
         return ProductMngServiceUtil.convertProductBaseInfoDO2DTO(productBaseInfo);
     }

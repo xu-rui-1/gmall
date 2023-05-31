@@ -2,7 +2,7 @@
  * Alipay.com Inc.
  * Copyright (c) 2004-2023 All Rights Reserved.
  */
-package com.alipay.gmall.common.utils;
+package com.alipay.gmall.common.client;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -19,10 +19,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author ruitu.xr
- * @version RedisCacheUtils.java, v 0.1 2023年05月19日 14:13 ruitu.xr Exp $
+ * @version RedisClient.java, v 0.1 2023年05月19日 14:13 ruitu.xr Exp $
  */
 @Component
-public class RedisCacheUtils {
+public class RedisClient {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
