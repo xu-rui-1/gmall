@@ -127,6 +127,7 @@ public class RedisCacheUtils {
         String value = this.get(key);
         List<V> result = Collections.emptyList();
         if (!StringUtils.isEmpty(value)) {
+            value = JSON.parse(value).toString();
             result = JSONArray.parseArray(value, clazz);
         }
         return result;

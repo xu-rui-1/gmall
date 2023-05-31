@@ -4,7 +4,7 @@
  */
 package com.alipay.gmall.utils;
 
-import com.alipay.gmall.dal.domain.ProductBaseInfoDO;
+import com.alipay.gmall.dal.domain.ProductBaseInfo;
 import com.alipay.gmall.dto.ProductBaseInfoDTO;
 import org.springframework.beans.BeanUtils;
 
@@ -21,21 +21,21 @@ public class ProductMngServiceUtil {
      * @param productBaseInfoDTO
      * @return
      */
-    public static ProductBaseInfoDO convertProductBaseInfoDTO2DO(ProductBaseInfoDTO productBaseInfoDTO) {
-        ProductBaseInfoDO productBaseInfoDO = new ProductBaseInfoDO();
-        BeanUtils.copyProperties(productBaseInfoDTO, productBaseInfoDO);
-        productBaseInfoDO.setGmtModified(new Date());
-        return productBaseInfoDO;
+    public static ProductBaseInfo convertProductBaseInfoDTO2DO(ProductBaseInfoDTO productBaseInfoDTO) {
+        ProductBaseInfo productBaseInfo = new ProductBaseInfo();
+        BeanUtils.copyProperties(productBaseInfoDTO, productBaseInfo);
+        productBaseInfo.setGmtModified(new Date());
+        return productBaseInfo;
     }
 
     /**
      * DO转DTO
-     * @param productBaseInfoDO
+     * @param productBaseInfo
      * @return
      */
-    public static ProductBaseInfoDTO convertProductBaseInfoDO2DTO(ProductBaseInfoDO productBaseInfoDO) {
+    public static ProductBaseInfoDTO convertProductBaseInfoDO2DTO(ProductBaseInfo productBaseInfo) {
         ProductBaseInfoDTO productBaseInfoDTO = new ProductBaseInfoDTO();
-        BeanUtils.copyProperties(productBaseInfoDO, productBaseInfoDTO);
+        BeanUtils.copyProperties(productBaseInfo, productBaseInfoDTO);
         return productBaseInfoDTO;
     }
 }

@@ -4,7 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad2fd708-7baa-4d63-9516-9f1480826b34" name="Changes" comment="" />
+    <list default="true" id="ad2fd708-7baa-4d63-9516-9f1480826b34" name="Changes" comment="fix issue: 产品增删改查">
+      <change afterPath="$PROJECT_DIR$/.idea/ConfPoetryConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dal/src/main/resources/jdbc-config.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dal/src/main/resources/mybatis-generator-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.aligenerator/product_base_info.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assembly/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/assembly/src/main/resources/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assembly/target/classes/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/assembly/target/classes/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/alipay/gmall/common/utils/RedisCacheUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/alipay/gmall/common/utils/RedisCacheUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/alipay/gmall/common/utils/RedisCacheUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/alipay/gmall/common/utils/RedisCacheUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dal/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/src/main/java/com/alipay/gmall/dal/dao/ProductBaseInfoDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/src/main/java/com/alipay/gmall/dal/domain/ProductBaseInfoDO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/src/main/java/com/alipay/gmall/dal/domain/ProductBaseInfoParam.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/src/main/resources/mapper/ProductBaseInfoDAO.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/target/classes/com/alipay/gmall/dal/dao/ProductBaseInfoDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/target/classes/com/alipay/gmall/dal/domain/ProductBaseInfoDO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/target/classes/com/alipay/gmall/dal/domain/ProductBaseInfoParam$AbstractGeneratedCriteria.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/target/classes/com/alipay/gmall/dal/domain/ProductBaseInfoParam$Criteria.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/target/classes/com/alipay/gmall/dal/domain/ProductBaseInfoParam$Criterion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/target/classes/com/alipay/gmall/dal/domain/ProductBaseInfoParam$OrderCondition.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/target/classes/com/alipay/gmall/dal/domain/ProductBaseInfoParam$SortType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/target/classes/com/alipay/gmall/dal/domain/ProductBaseInfoParam.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dal/target/classes/mapper/ProductBaseInfoDAO.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/alipay/gmall/service/ProductMngService.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/alipay/gmall/service/ProductMngService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/alipay/gmall/service/impl/ProductMngServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/alipay/gmall/service/impl/ProductMngServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/alipay/gmall/utils/ProductMngServiceUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/src/main/java/com/alipay/gmall/utils/ProductMngServiceUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/target/classes/com/alipay/gmall/service/impl/ProductMngServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/alipay/gmall/service/impl/ProductMngServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/target/classes/com/alipay/gmall/utils/ProductMngServiceUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/target/classes/com/alipay/gmall/utils/ProductMngServiceUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/alipay/gmall/web/controller/MybatisController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/target/classes/com/alipay/gmall/web/controller/MybatisController.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +89,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="LINKC_FILTER_ACTION" value="all" />
     <property name="LINKC_GROUP_BY_USER_ACTION" value="ALL" />
     <property name="LINKC_SEARCH_ACTION" value="" />
@@ -67,13 +102,18 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dal/src/main/resources" />
       <recent name="$PROJECT_DIR$/assembly/src/main/resources" />
       <recent name="$PROJECT_DIR$/config" />
     </key>
@@ -88,6 +128,7 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
+      <command value="mvn install" />
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.AssemblyApplication">
@@ -142,8 +183,38 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685419653221</updated>
-      <workItem from="1685419655827" duration="27328000" />
+      <workItem from="1685419655827" duration="35660000" />
+      <workItem from="1685497966133" duration="14841000" />
     </task>
+    <task id="LOCAL-00001" summary="fix issue: init">
+      <created>1685452880624</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685452880624</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix issue: init">
+      <created>1685453355192</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685453355192</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix issue: init">
+      <created>1685456082516</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685456082516</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix issue: 产品增删改查">
+      <created>1685460805654</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685460805654</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,10 +225,29 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="ruitu-feature" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="fix issue: init" />
+    <MESSAGE value="fix issue: 产品增删改查" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix issue: 产品增删改查" />
   </component>
 </project>
