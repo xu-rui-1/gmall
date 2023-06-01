@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ruitu.xr
@@ -88,17 +90,71 @@ public class RabbitMqConfig {
     public static final String CANAL_QUEUE = "canal_queue";
     public static final String CANAL_ROUTING_KEY = "canal_routing_key";
 
+    //死信交换机
+    public static final String DEAD_LETTER_EXCHANGE = "dead_exchange";
+    //死信队列
+    public static final String DEAD_QUEUE = "dead_queue";
+    //死信队列的路由key
+    public static final String DEAD_ROUTING_KEY = "dead_routing_key";
+
+    //声明死信交换机
+    @Bean
+    public DirectExchange deadExchange() {
+        return ExchangeBuilder.directExchange(DEAD_LETTER_EXCHANGE).durable(true).build();
+    }
+
+    //声明死信队列
+    @Bean
+    public Queue deadQueue() {
+        return QueueBuilder.durable(DEAD_QUEUE).build();
+    }
+
+    @Bean
+    public Binding deadQueueBinding() {
+        return BindingBuilder.bind(deadQueue()).to(deadExchange()).with(DEAD_ROUTING_KEY);
+    }
+
     @Bean
     public DirectExchange canalDirectExchange() {
         return ExchangeBuilder.directExchange(CANAL_EXCHANGE).durable(true).build();
     }
 
+    /**
+     * 将该队列绑定指定的死信队列
+     * @return
+     */
     @Bean
     public Queue canalDirectQueue() {
-        return new Queue(CANAL_QUEUE, true, false, false);
+        Map<String, Object> args = new HashMap<>();
+        args.put("x-dead-letter-exchange", DEAD_LETTER_EXCHANGE);
+        args.put("x-dead-letter-routing-key", DEAD_ROUTING_KEY);
+        return new Queue(CANAL_QUEUE, true, false, false, args);
     }
     @Bean
     public Binding canalDirectBinding() {
         return BindingBuilder.bind(canalDirectQueue()).to(canalDirectExchange()).with(CANAL_ROUTING_KEY);
     }
+
+    /**
+     * 定义延时交换机、延时队列、延时路由key
+     */
+    public static final String DELAYED_EXCHANGE = "delayed_exchange";
+    public static final String DELAYED_QUEUE = "delayed_queue";
+    public static final String DELAYED_ROUTING_KEY = "delayed_routing_key";
+
+    @Bean
+    public CustomExchange delayedExchange() {
+        Map<String, Object> args = new HashMap<>();
+        args.put("x-delayed-type", "direct");
+        return new CustomExchange(DELAYED_EXCHANGE, "x-delayed-message", true, false, args);
+    }
+    @Bean
+    public Queue delayedQueue() {
+        return QueueBuilder.durable(DELAYED_QUEUE).build();
+    }
+    @Bean
+    public Binding delayedQueueBinding() {
+        return BindingBuilder.bind(deadQueue()).to(delayedExchange()).with(DEAD_ROUTING_KEY).noargs();
+    }
+
 }
