@@ -15,7 +15,6 @@ import com.alipay.gmall.common.exception.ProductBizException;
 import com.alipay.gmall.config.RabbitMqConfig;
 import com.alipay.gmall.dal.domain.ProductBaseInfo;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.MessageProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
@@ -52,9 +51,8 @@ public class CanalRabbitListener {
             String table = jsonObject.getString(CANAL_LISTEN_TABLE);
             if (!TABLE_NAME.equalsIgnoreCase(table)) {
                 LOGGER.warn("该数据不是来自product_base_info表，无需处理。该数据所在表：{}", table);
-            } else {
-                throw new ProductBizException(ResultCodeEnum.QUERY_ERROR, "error");
             }
+
             /**
              * 将数据同步至redis
              */
@@ -84,7 +82,7 @@ public class CanalRabbitListener {
                     throw new ProductBizException(ResultCodeEnum.ILLEGAL_PARAMETER, errorMsg);
             }
             channel.basicAck(deliveryTag, false);
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOGGER.error("消息签收失败，将消息转发至备用队列进行处理....", e);
             try {
                 /**
