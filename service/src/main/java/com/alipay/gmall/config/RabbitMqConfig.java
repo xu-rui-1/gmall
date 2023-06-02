@@ -154,7 +154,7 @@ public class RabbitMqConfig {
     }
     @Bean
     public Binding delayedQueueBinding() {
-        return BindingBuilder.bind(deadQueue()).to(delayedExchange()).with(DEAD_ROUTING_KEY).noargs();
+        return BindingBuilder.bind(deadQueue()).to(delayedExchange()).with(DELAYED_ROUTING_KEY).noargs();
     }
 
 }
