@@ -24,12 +24,13 @@
         <spring.boot.version>2.7.12</spring.boot.version>
         <mybatis.version>2.3.0</mybatis.version>
         <mysql.version>5.1.38</mysql.version>
-        <druid.version>1.2.6</druid.version>
+        <druid.version>1.2.5</druid.version>
         <fastjson.version>1.2.83</fastjson.version>
         <log4j.version>1.2.17</log4j.version>
         <canal.version>1.1.6</canal.version>
         <dubbo.version>2.7.8</dubbo.version>
         <nacos.version>0.2.7</nacos.version>
+        <junit.version>4.12</junit.version>
     </properties>
     <modules>
         <module>common</module>
@@ -37,6 +38,7 @@
         <module>service</module>
         <module>dal</module>
         <module>web</module>
+        <module>test</module>
         <module>assembly</module>
     </modules>
     <dependencyManagement>
@@ -202,6 +204,7 @@
                 <version>${spring.boot.version}</version>
             </dependency>
 
+            <!-- dubbo + nacos -->
             <dependency>
                 <groupId>com.alibaba.boot</groupId>
                 <artifactId>nacos-discovery-spring-boot-starter</artifactId>
@@ -211,6 +214,20 @@
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo.version}</version>
+            </dependency>
+
+            <!-- junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <!-- 查看对象头工具 -->
+            <dependency>
+                <groupId>org.openjdk.jol</groupId>
+                <artifactId>jol-core</artifactId>
+                <version>0.9</version>
             </dependency>
 
         </dependencies>

@@ -29,7 +29,7 @@ import java.util.Objects;
  * @author ruitu.xr
  * @version ProductMngServiceImpl.java, v 0.1 2023年05月30日 13:40 ruitu.xr Exp $
  */
-@Service
+@Service("productMngService")
 public class ProductMngServiceImpl implements ProductMngService {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(ProductMngServiceImpl.class);
