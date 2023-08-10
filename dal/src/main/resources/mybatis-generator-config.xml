@@ -9,7 +9,7 @@
     <!-- 引入配置文件 -->
     <properties resource="jdbc-config.properties"/>
 
-    <!-- 一个数据库一个context,context的子元素必须按照它给出的顺序
+    <!-- 一个数据库一个con text,context的子元素必须按照它给出的顺序
         property*,plugin*,commentGenerator?,jdbcConnection,javaTypeResolver?,
         javaModelGenerator,sqlMapGenerator?,javaClientGenerator?,table+
     -->

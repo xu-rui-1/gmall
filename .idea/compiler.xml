@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="assembly" />
         <module name="common" />
+        <module name="test" />
         <module name="web" />
-        <module name="spi" />
         <module name="service" />
+        <module name="assembly" />
+        <module name="spi" />
         <module name="dal" />
       </profile>
     </annotationProcessing>
@@ -23,6 +24,7 @@
       <module name="gamll-parent" options="" />
       <module name="service" options="-parameters" />
       <module name="spi" options="-parameters" />
+      <module name="test" options="-parameters" />
       <module name="web" options="-parameters" />
     </option>
   </component>
